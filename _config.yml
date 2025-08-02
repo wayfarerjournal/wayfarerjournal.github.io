@@ -1,0 +1,63 @@
+# Site settings
+title: Wayfarer Journal
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  A personal travel and adventure journal. Share stories, experiences, and insights from journeys around the world.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://wayfarerjournal.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: wayfarerjournal
+github_username:  wayfarerjournal
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Custom CSS
+sass:
+  load_paths:
+    - _sass
+    - assets/css
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Wayfarer"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Pagination - Disabled to remove automatic posts listing
+# paginate: 5
+# paginate_path: "/page/:num/"
+
+# Social media
+social_media:
+  - name: GitHub
+    url: https://github.com/wayfarerjournal
+  - name: Twitter
+    url: https://twitter.com/wayfarerjournal 

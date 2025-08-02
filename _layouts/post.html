@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    /* Custom Font Face */
+    @font-face {
+      font-family: 'Ivy Presto Headline';
+      src: url('/assets/fonts/fonnts.com-Ivy-Presto-Headline-Semi-Bold.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Ivy Presto Display Light';
+      src: url('/assets/fonts/fonnts.com-Ivy-Presto-Display-Light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Neutraface Text Bold';
+      src: url('/assets/fonts/Neutraface Text Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --heading-font: 'Ivy Presto Headline', serif;
+      --nav-font: 'Work Sans', sans-serif;
+      --body-font: 'Merriweather', serif;
+    }
+
+    /* Override heading fonts */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--heading-font) !important;
+      font-weight: 400 !important;
+    }
+
+    /* Override navigation font */
+    .site-nav {
+      font-family: var(--nav-font) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 1em !important;
+      text-transform: uppercase !important;
+      letter-spacing: 3.24px !important;
+    }
+
+    .site-nav .page-link {
+      font-family: var(--nav-font) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 1em !important;
+      text-transform: uppercase !important;
+      letter-spacing: 3.24px !important;
+    }
+
+    .site-nav .trigger {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+    }
+
+    .site-nav .trigger .page-link {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+      padding: 0 10px !important;
+    }
+
+    /* Center the navigation */
+    .site-nav {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+
+    /* Responsive navigation */
+    @media (max-width: 768px) {
+      .site-nav {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        margin-top: 15px !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+      }
+      
+      .site-nav .trigger {
+        flex-direction: row !important;
+        gap: 20px !important;
+        justify-content: center !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+      }
+      
+      .site-nav .trigger .page-link {
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+        letter-spacing: 1.5px !important;
+        color: white !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+      }
+      
+      .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+      }
+      
+      .logo-container {
+        margin-bottom: 0 !important;
+      }
+      
+      .nav-trigger,
+      .menu-icon {
+        display: none !important;
+      }
+    }
+
+    /* Ensure the header wrapper allows for proper centering */
+    .site-header .wrapper {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      position: relative !important;
+    }
+
+    /* Post Hero Section Styles */
+    .post-hero-section {
+      position: relative !important;
+      height: 100vh !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      overflow: hidden !important;
+      padding: 10px !important;
+      box-sizing: border-box !important;
+    }
+
+    .post-hero-background {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: url('{{ page.image }}') center/cover !important;
+      z-index: -1 !important;
+      border: 10px solid white !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Header in post hero section */
+    .post-hero-section .site-header {
+      background: transparent !important;
+      padding: 30px 0 20px 0 !important;
+      z-index: 10 !important;
+      border-bottom: none !important;
+    }
+
+    .post-hero-section .site-header .wrapper {
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+      padding: 0 20px !important;
+    }
+
+    /* Logo styling */
+    .site-logo {
+      height: 65px !important;
+      width: auto !important;
+      display: block !important;
+    }
+
+    /* Logo in post hero */
+    .post-hero-section .site-logo {
+      height: 65px !important;
+    }
+
+    /* Navigation in post hero */
+    .post-hero-section .site-nav .page-link {
+      color: white !important;
+    }
+
+    .post-hero-section .menu-icon svg {
+      fill: white !important;
+    }
+
+    /* Post hero content */
+    .post-hero-content {
+      flex: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      padding: 0 20px !important;
+    }
+
+    .post-hero-title {
+      font-size: 80px !important;
+      font-weight: 700 !important;
+      color: white !important;
+      margin: -35px 0 20px 0 !important;
+      letter-spacing: 0.2px !important;
+      line-height: 1.2em !important;
+    }
+
+    /* Main content below hero */
+    .page-content {
+      background: white !important;
+      position: relative !important;
+      z-index: 1 !important;
+      margin-top: 0 !important;
+    }
+
+    /* Override body font */
+    body {
+      font-family: var(--body-font) !important;
+    }
+    
+    /* Link styling */
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+      transition: color 0.3s ease !important;
+    }
+    
+    a:hover {
+      color: #ed1c24 !important;
+    }
+
+    p, li, div, span {
+      font-family: var(--body-font) !important;
+    }
+
+    /* Post Info Section */
+    .post-info-section {
+      max-width: 800px !important;
+      margin: 0 auto !important;
+      padding: 80px 20px 40px 20px !important;
+      text-align: center !important;
+    }
+    
+    .post-date-top {
+      font-family: 'Neutraface Text Bold', sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      color: #999 !important;
+      margin-bottom: 20px !important;
+    }
+    
+    .post-info-title {
+      font-family: var(--heading-font) !important;
+      font-size: 36px !important;
+      font-weight: 400 !important;
+      color: #333 !important;
+      margin: 0 0 30px 0 !important;
+      line-height: 1.2 !important;
+    }
+    
+    .post-description {
+      font-family: 'Ivy Presto Display Light', serif !important;
+      font-size: 21px !important;
+      font-style: normal !important;
+      color: #666 !important;
+      margin: 0 0 30px 0 !important;
+      line-height: 1.6 !important;
+      max-width: 600px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    
+    .post-meta-info {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 8px !important;
+      font-family: 'Neutraface Text Bold', sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      color: #333 !important;
+      margin-bottom: 30px !important;
+    }
+    
+    .post-date {
+      color: #999 !important;
+      font-size: 12px !important;
+      font-family: 'Neutraface Text Bold', sans-serif !important;
+    }
+    
+    .post-author {
+      color: #ed1c24 !important;
+    }
+    
+    .post-date {
+      color: #999 !important;
+    }
+    
+    .post-divider {
+      width: 100% !important;
+      max-width: 600px !important;
+      height: 1px !important;
+      background-color: #e5e5e5 !important;
+      margin: 0 auto !important;
+    }
+    
+    /* Ensure post content uses the body font */
+    .post-content {
+      font-family: var(--body-font) !important;
+      max-width: 800px !important;
+      margin: 0 auto !important;
+      padding: 0 20px 60px 20px !important;
+      line-height: 1.8 !important;
+    }
+    
+    /* Post content heading hierarchy */
+    .post-content h1 {
+      font-family: var(--heading-font) !important;
+      font-size: 2.5rem !important;
+      font-weight: 400 !important;
+      margin: 2rem 0 1rem 0 !important;
+      line-height: 1.3 !important;
+    }
+    
+    .post-content h2 {
+      font-family: var(--heading-font) !important;
+      font-size: 2rem !important;
+      font-weight: 400 !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      line-height: 1.3 !important;
+    }
+
+    /* Override any theme-specific font settings */
+    .site-title {
+      font-family: var(--heading-font) !important;
+    }
+
+    .post-title {
+      font-family: var(--heading-font) !important;
+    }
+
+    .post-meta {
+      font-family: var(--body-font) !important;
+    }
+    
+    /* Post Navigation Styling */
+    .post-navigation {
+      margin-top: 60px !important;
+      padding-top: 40px !important;
+      border-top: 1px solid #e5e5e5 !important;
+    }
+    
+    .nav-buttons {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      max-width: 600px !important;
+      margin: 0 auto !important;
+    }
+    
+    .nav-button {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 12px 20px !important;
+      background: transparent !important;
+      color: #333 !important;
+      text-decoration: none !important;
+      border: 2px solid #333 !important;
+      border-radius: 4px !important;
+      font-family: var(--nav-font) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    .nav-button:hover {
+      background: #ed1c24 !important;
+      color: white !important;
+      border-color: #ed1c24 !important;
+    }
+    
+    .nav-arrow {
+      font-size: 18px !important;
+      font-weight: bold !important;
+    }
+    
+    .return-button {
+      background: #ed1c24 !important;
+      color: white !important;
+      border-color: #ed1c24 !important;
+    }
+    
+    .return-button:hover {
+      background: #c41820 !important;
+      border-color: #c41820 !important;
+    }
+    
+    /* Responsive navigation */
+    @media (max-width: 768px) {
+      .nav-buttons {
+        flex-direction: column !important;
+        gap: 15px !important;
+      }
+      
+      .nav-button {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+    }
+  </style>
+
+  <body>
+
+    <!-- Post Hero Section -->
+    <section class="post-hero-section">
+      <div class="post-hero-background"></div>
+      
+      <header class="site-header" role="banner">
+        <div class="wrapper">
+          <div class="header-content">
+            <div class="logo-container">
+              <a href="/">
+                <img src="/assets/Wayfarer-Simple-filled-300x300.png" alt="Wayfarer Journal Logo" class="site-logo">
+              </a>
+            </div>
+            
+            <nav class="site-nav">
+              <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+              <label for="nav-trigger">
+                <span class="menu-icon">
+                  <svg viewBox="0 0 18 15" width="18px" height="15px">
+                    <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                  </svg>
+                </span>
+              </label>
+
+              <div class="trigger">
+                <a class="page-link" href="/about/">ABOUT</a>
+                <a class="page-link" href="/">HOME</a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div class="post-hero-content">
+        <div class="wrapper">
+          <h1 class="post-hero-title">{{ page.title }}</h1>
+        </div>
+      </div>
+    </section>
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Post Info Section -->
+        <div class="post-info-section">
+          <h1 class="post-info-title">{{ page.title }}</h1>
+          <p class="post-description">{{ page.description | default: "A story from the journey." }}</p>
+          <div class="post-meta-info">
+            <span class="post-author">By Kyle Pasalskyj</span>
+          </div>
+          <div class="post-divider"></div>
+        </div>
+        
+        <article class="post-content">
+          {{ content }}
+        </article>
+        
+        <!-- Post Navigation -->
+        <div class="post-navigation">
+          <div class="nav-buttons">
+            {% if page.previous.url %}
+              <a href="{{ page.previous.url }}" class="nav-button prev-button">
+                <span class="nav-arrow">←</span>
+                <span class="nav-text">Previous</span>
+              </a>
+            {% endif %}
+            
+            <a href="/" class="nav-button return-button">
+              <span class="nav-text">Return</span>
+            </a>
+            
+            {% if page.next.url %}
+              <a href="{{ page.next.url }}" class="nav-button next-button">
+                <span class="nav-text">Next</span>
+                <span class="nav-arrow">→</span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html> 

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    /* Custom Font Face */
+    @font-face {
+      font-family: 'Ivy Presto Headline';
+      src: url('/assets/fonts/fonnts.com-Ivy-Presto-Headline-Semi-Bold.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --heading-font: 'Ivy Presto Headline', serif;
+      --nav-font: 'Work Sans', sans-serif;
+      --body-font: 'Merriweather', serif;
+    }
+
+    /* Override heading fonts */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--heading-font) !important;
+      font-weight: 400 !important;
+    }
+
+    /* Override navigation font */
+    .site-nav {
+      font-family: var(--nav-font) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 1em !important;
+      text-transform: uppercase !important;
+      letter-spacing: 3.24px !important;
+    }
+
+    .site-nav .page-link {
+      font-family: var(--nav-font) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 1em !important;
+      text-transform: uppercase !important;
+      letter-spacing: 3.24px !important;
+    }
+
+    .site-nav .trigger {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+    }
+
+    .site-nav .trigger .page-link {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+      padding: 0 10px !important;
+    }
+    
+    /* Responsive navigation */
+    @media (max-width: 768px) {
+      .site-nav {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        margin-top: 15px !important;
+      }
+      
+      .site-nav .trigger {
+        flex-direction: row !important;
+        gap: 20px !important;
+        justify-content: center !important;
+      }
+      
+      .site-nav .trigger .page-link {
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+        letter-spacing: 1.5px !important;
+      }
+      
+      .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+      }
+      
+      .logo-container {
+        margin-bottom: 0 !important;
+      }
+      
+      .nav-trigger,
+      .menu-icon {
+        display: none !important;
+      }
+    }
+
+    /* Site header */
+    .site-header {
+      background: white;
+      padding: 30px 0 20px 0;
+      border-bottom: none;
+    }
+
+    .header-content {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .site-logo {
+      height: 65px !important;
+      width: auto !important;
+      display: block !important;
+    }
+
+    .logo-container {
+      flex-shrink: 0 !important;
+    }
+
+    /* Center the navigation */
+    .site-nav {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+
+    .site-nav .page-link {
+      color: #333 !important;
+      text-decoration: none !important;
+      margin-left: 20px !important;
+      transition: color 0.3s ease !important;
+    }
+
+    .site-nav .page-link:hover {
+      color: #ed1c24 !important;
+    }
+
+    /* Ensure the header wrapper allows for proper centering */
+    .site-header .wrapper {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      position: relative !important;
+    }
+
+    /* Page content */
+    .page-content {
+      background: white;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hide page title */
+    .post-title {
+      display: none !important;
+    }
+  </style>
+
+  <body>
+
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+        <div class="header-content">
+          <div class="logo-container">
+            <a href="/">
+              <img src="/assets/Wayfarer-Simple-filled-300x300.png" alt="Wayfarer Journal Logo" class="site-logo">
+            </a>
+          </div>
+          
+          <nav class="site-nav">
+            <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+            <label for="nav-trigger">
+              <span class="menu-icon">
+                <svg viewBox="0 0 18 15" width="18px" height="15px">
+                  <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                </svg>
+              </span>
+            </label>
+
+                          <div class="trigger">
+                <a class="page-link" href="/">HOME</a>
+                <a class="page-link" href="/about/">ABOUT</a>
+              </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content" aria-label="Content">
+      {{ content }}
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html> 

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    /* Custom Font Face */
+    @font-face {
+      font-family: 'Ivy Presto Headline';
+      src: url('/assets/fonts/fonnts.com-Ivy-Presto-Headline-Semi-Bold.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --heading-font: 'Ivy Presto Headline', serif;
+      --nav-font: 'Work Sans', sans-serif;
+      --body-font: 'Merriweather', serif;
+    }
+
+    /* Override heading fonts */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--heading-font) !important;
+      font-weight: 400 !important;
+    }
+
+    /* Override navigation font */
+    .site-nav {
+      font-family: var(--nav-font) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 1em !important;
+      text-transform: uppercase !important;
+      letter-spacing: 3.24px !important;
+    }
+
+    .site-nav .page-link {
+      font-family: var(--nav-font) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 1em !important;
+      text-transform: uppercase !important;
+      letter-spacing: 3.24px !important;
+    }
+
+    .site-nav .trigger {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+    }
+
+    .site-nav .trigger .page-link {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+      padding: 0 10px !important;
+    }
+    
+    /* Responsive navigation */
+    @media (max-width: 768px) {
+      .site-nav {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        margin-top: 15px !important;
+      }
+      
+      .site-nav .trigger {
+        flex-direction: row !important;
+        gap: 20px !important;
+        justify-content: center !important;
+      }
+      
+      .site-nav .trigger .page-link {
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+        letter-spacing: 1.5px !important;
+      }
+      
+      .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+      }
+      
+      .logo-container {
+        margin-bottom: 0 !important;
+      }
+      
+      .nav-trigger,
+      .menu-icon {
+        display: none !important;
+      }
+    }
+
+    /* Logo styling */
+    .site-logo {
+      height: 65px !important;
+      width: auto !important;
+      display: block !important;
+    }
+
+    .logo-container {
+      flex-shrink: 0 !important;
+    }
+
+    /* Header layout */
+    .header-content {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+    }
+
+    /* Center the navigation */
+    .site-nav {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+    
+    /* Responsive navigation */
+    @media (max-width: 768px) {
+      .site-nav {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        margin-top: 15px !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+      }
+      
+      .site-nav .trigger {
+        flex-direction: row !important;
+        gap: 20px !important;
+        justify-content: center !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+      }
+      
+      .site-nav .trigger .page-link {
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+        letter-spacing: 1.5px !important;
+        color: white !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+      }
+      
+      .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+      }
+      
+      .logo-container {
+        margin-bottom: 0 !important;
+      }
+      
+      .nav-trigger,
+      .menu-icon {
+        display: none !important;
+      }
+    }
+
+    /* Ensure the header wrapper allows for proper centering */
+    .site-header .wrapper {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      position: relative !important;
+    }
+
+    /* Hero Section Styles */
+    .hero-section {
+      position: relative !important;
+      height: 100vh !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      overflow: hidden !important;
+      padding: 10px !important;
+      box-sizing: border-box !important;
+    }
+
+    .hero-background {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: url('/assets/images/the-crossing.jpg') center/cover !important;
+      z-index: -1 !important;
+      border: 10px solid white !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Header in hero section */
+    .hero-section .site-header {
+      background: transparent !important;
+      padding: 30px 0 20px 0 !important;
+      z-index: 10 !important;
+      border-bottom: none !important;
+    }
+
+    .hero-section .site-header .wrapper {
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+      padding: 0 20px !important;
+    }
+
+    /* Logo in hero */
+    .hero-section .site-logo {
+      height: 65px !important;
+    }
+
+    /* Navigation in hero */
+    .hero-section .site-nav .page-link {
+      color: white !important;
+    }
+
+    .hero-section .menu-icon svg {
+      fill: white !important;
+    }
+
+    /* Hero content */
+    .hero-content {
+      flex: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      padding: 0 20px !important;
+    }
+
+    .hero-title {
+      font-size: 80px !important;
+      font-weight: 700 !important;
+      color: white !important;
+      margin: -35px 0 20px 0 !important;
+      letter-spacing: 0.2px !important;
+      line-height: 1.2em !important;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem !important;
+      color: rgba(255,255,255,0.9) !important;
+      max-width: 600px !important;
+      margin: 0 auto !important;
+      line-height: 1.6 !important;
+    }
+
+    /* Main content below hero */
+    .page-content {
+      background: white !important;
+      position: relative !important;
+      z-index: 1 !important;
+      margin-top: 0 !important;
+    }
+
+    /* Override body font */
+    body {
+      font-family: var(--body-font) !important;
+    }
+    
+    /* Link styling */
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+      transition: color 0.3s ease !important;
+    }
+    
+    a:hover {
+      color: #ed1c24 !important;
+    }
+
+    p, li, div, span {
+      font-family: var(--body-font) !important;
+    }
+
+    /* Ensure post content uses the body font */
+    .post-content {
+      font-family: var(--body-font) !important;
+    }
+
+    /* Override any theme-specific font settings */
+    .site-title {
+      font-family: var(--heading-font) !important;
+    }
+
+    .post-title {
+      font-family: var(--heading-font) !important;
+    }
+
+    .post-meta {
+      font-family: var(--body-font) !important;
+    }
+    
+    /* About the Journal section styling */
+    .about-journal {
+      text-align: center !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 60px 20px !important;
+      background-color: #fafafa !important;
+      border-radius: 0 !important;
+      margin-top: -20px !important;
+    }
+    
+    .about-journal h2 {
+      font-family: var(--heading-font) !important;
+      font-size: 2.5rem !important;
+      margin-bottom: 40px !important;
+      color: #333 !important;
+    }
+    
+    .about-journal p {
+      font-family: var(--body-font) !important;
+      font-size: 1.1rem !important;
+      line-height: 1.8 !important;
+      margin-bottom: 20px !important;
+      color: #555 !important;
+    }
+    
+    /* Posts section styling */
+    .posts-section {
+      margin: 80px 0 !important;
+      text-align: center !important;
+    }
+    
+    .posts-section h2 {
+      font-family: var(--heading-font) !important;
+      font-size: 2.5rem !important;
+      margin-bottom: 50px !important;
+      color: #333 !important;
+    }
+    
+    .posts-grid {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 20px !important;
+      margin-bottom: 40px !important;
+    }
+    
+    .post-card {
+      position: relative !important;
+      overflow: hidden !important;
+      border-radius: 8px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+      transition: transform 0.3s ease !important;
+    }
+    
+    .post-card:hover {
+      transform: translateY(-5px) !important;
+    }
+    
+    .post-image {
+      position: relative !important;
+      width: 100% !important;
+      height: 300px !important;
+      overflow: hidden !important;
+    }
+    
+    .post-image img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      transition: transform 0.3s ease !important;
+    }
+    
+    .post-card:hover .post-image img {
+      transform: scale(1.05) !important;
+    }
+    
+    .post-overlay {
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)) !important;
+      padding: 30px 20px 20px !important;
+      color: white !important;
+    }
+    
+    .post-overlay h3 {
+      font-family: var(--heading-font) !important;
+      font-size: 1.2rem !important;
+      margin: 0 !important;
+      font-weight: 400 !important;
+    }
+    
+    .view-more-container {
+      margin-top: 40px !important;
+    }
+    
+    .view-more-button {
+      display: inline-block !important;
+      padding: 12px 30px !important;
+      background: #ed1c24 !important;
+      color: white !important;
+      text-decoration: none !important;
+      border-radius: 4px !important;
+      font-family: var(--nav-font) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      transition: background-color 0.3s ease !important;
+    }
+    
+    .view-more-button:hover {
+      background: #c41820 !important;
+      color: white !important;
+    }
+    
+    /* Responsive posts grid */
+    @media (max-width: 1024px) {
+      .posts-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .posts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+      }
+      
+      .post-image {
+        height: 250px !important;
+      }
+    }
+
+    /* Hide automatic posts listing */
+    .post-list-heading,
+    .post-list,
+    .rss-subscribe {
+      display: none !important;
+    }
+
+    /* Hide page title on about page */
+    .post-title {
+      display: none !important;
+    }
+  </style>
+
+  <body>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background"></div>
+      
+      <header class="site-header" role="banner">
+        <div class="wrapper">
+          <div class="header-content">
+            <div class="logo-container">
+              <a href="/">
+                <img src="/assets/Wayfarer-Simple-filled-300x300.png" alt="Wayfarer Journal Logo" class="site-logo">
+              </a>
+            </div>
+            
+            <nav class="site-nav">
+              <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+              <label for="nav-trigger">
+                <span class="menu-icon">
+                  <svg viewBox="0 0 18 15" width="18px" height="15px">
+                    <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                  </svg>
+                </span>
+              </label>
+
+              <div class="trigger">
+                <a class="page-link" href="/">HOME</a>
+                <a class="page-link" href="/about/">ABOUT</a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div class="hero-content">
+        <div class="wrapper">
+          <h1 class="hero-title">Wayfarer Journal</h1>
+        </div>
+      </div>
+    </section>
+
+    <main class="page-content" aria-label="Content">
+      {{ content }}
+    </main>
+
+    {%- include footer.html -%}
+
+
+
+  </body>
+
+</html> 
